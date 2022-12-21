@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { BillController } from './bill.controller';
-import { BillService } from './bill.service';
+import { BillController } from './api/controllers/bill.controller';
+import { BillService } from './application/bill.service';
 
 @Module({
   imports: [],

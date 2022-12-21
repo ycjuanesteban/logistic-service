@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { BillService } from './bill.service';
+import { BillService } from '../../application/bill.service';
 
 @Controller()
 export class BillController {
