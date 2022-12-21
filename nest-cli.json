@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/checkout/src",
+  "monorepo": true,
+  "root": "apps/checkout",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/checkout/tsconfig.app.json"
+  },
+  "projects": {
+    "checkout": {
+      "type": "application",
+      "root": "apps/checkout",
+      "entryFile": "main",
+      "sourceRoot": "apps/checkout/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/checkout/tsconfig.app.json"
+      }
+    },
+    "bill": {
+      "type": "application",
+      "root": "apps/bill",
+      "entryFile": "main",
+      "sourceRoot": "apps/bill/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/bill/tsconfig.app.json"
+      }
+    },
+    "logistic": {
+      "type": "application",
+      "root": "apps/logistic",
+      "entryFile": "main",
+      "sourceRoot": "apps/logistic/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/logistic/tsconfig.app.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    }
+  }
+}
