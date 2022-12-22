@@ -9,20 +9,13 @@ var UseMySQL = [
         username: 'user',
         password: 'password',
         database: 'db',
-        //migrations: [__dirname + '../migrations/*.ts'],
         entities: [
             User,
             Bill,
             BillDetail
         ],
-        synchronize: true,
-        logger: "debug"
-    })//,
-    // TypeOrmModule.forFeature([
-    //     User,
-    //     Bill,
-    //     BillDetail
-    // ])
+        synchronize: true
+    })
 ]
 
 export default UseMySQL;

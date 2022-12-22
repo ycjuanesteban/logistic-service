@@ -1,5 +1,5 @@
 import { BasicEntity } from "@app/shared";
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { BillDetail } from "./billdetail.entity";
 import { User } from "./user.entity";
 
@@ -7,11 +7,15 @@ import { User } from "./user.entity";
 export class Bill extends BasicEntity {
 
     @Column()
-    TotalCost: number;
+    public Date: Date;
+
+    @Column()
+    public Address: string;
 
     @OneToMany(type => BillDetail, detail => detail.Bill, { eager: true })
-    Details: BillDetail[];
+    public Details: BillDetail[];
 
-    @OneToMany(type => User, user => user.Bills)
-    User: User;
+    @ManyToOne(type => User, user => user.Bills)
+    @JoinColumn({ name: "ClientId" })
+    public User: User;
 }
