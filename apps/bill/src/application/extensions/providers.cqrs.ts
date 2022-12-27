@@ -1,5 +1,5 @@
-import { AddBillHandler } from "../bill/addBill/addBillHandler";
+import { AddBillCommandHandler } from "../bill/addBill/addBillCommandHandler";
 
-export const UseCqrs = [
-    AddBillHandler
+export const commandsHandlers = [
+    AddBillCommandHandler
 ]

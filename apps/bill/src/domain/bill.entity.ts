@@ -12,7 +12,7 @@ export class Bill extends BasicEntity {
     @Column()
     public Address: string;
 
-    @OneToMany(type => BillDetail, detail => detail.Bill, { eager: true })
+    @OneToMany(type => BillDetail, detail => detail.Bill, { eager: true, cascade: true })
     public Details: BillDetail[];
 
     @ManyToOne(type => User, user => user.Bills)

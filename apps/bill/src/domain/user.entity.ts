@@ -8,6 +8,6 @@ export class User extends BasicEntity {
     @Column({ type: "varchar", length: 200 })
     Name: string;
 
-    @OneToMany(type => Bill, bill => bill.User, { eager: true })
+    @OneToMany(type => Bill, bill => bill.User, { eager: true, cascade: true  })
     Bills: Bill[]
 }

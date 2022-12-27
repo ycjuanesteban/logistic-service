@@ -1,23 +1,22 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { BillController } from './api/controllers/bill.controller';
-import { BillService } from './application/bill.service';
-import { UseCqrs } from './application/extensions/providers.cqrs';
-import UseMySQL from './data/extensions/orm.extension';
-import { databaseProviders } from './data/providers/database.provider';
+import { commandsHandlers } from './application/extensions/providers.cqrs';
+import { factoriesServices } from './application/extensions/services';
+import { databaseProviders, repositoryProviders } from './data';
 
 @Module({
   imports: [
-    CqrsModule,
-    ...UseMySQL
+    CqrsModule
   ],
   controllers: [
     BillController
   ],
   providers: [
-    BillService,
     ...databaseProviders,
-    ...UseCqrs
+    ...repositoryProviders,
+    ...commandsHandlers,
+    ...factoriesServices
   ],
 })
 export class BillModule { }

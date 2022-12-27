@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { Bill, BillDetail, User } from '../../domain';
 
 export const databaseProviders = [
   {
@@ -8,12 +9,13 @@ export const databaseProviders = [
         type: 'mysql',
         host: 'localhost',
         port: 3306,
-        username: 'root',
-        password: 'root',
-        database: 'test',
-        migrations: ['../migrations/*.ts'],
+        username: 'user',
+        password: 'password',
+        database: 'db',
         entities: [
-            __dirname + '/../../domain/*.entity.ts',
+          User,
+          Bill,
+          BillDetail
         ],
         synchronize: true
       });
