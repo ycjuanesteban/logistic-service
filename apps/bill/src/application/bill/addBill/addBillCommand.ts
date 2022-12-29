@@ -1,4 +1,4 @@
-export class Product {
+export class ProductCommand {
     ProductId: number;
     Quantity: number;
     Cost: number;
@@ -7,7 +7,7 @@ export class Product {
 export class AddBillCommand {
     UserId: number;
     Address: string;
-    Products: Product[];
+    Products: ProductCommand[];
 
     constructor() {
         this.Products = [];

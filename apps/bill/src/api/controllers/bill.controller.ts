@@ -14,6 +14,7 @@ export class BillController {
 
   @Post()
   @ApiResponse({ status: 204 })
+  @ApiResponse({ status: 400 })
   @ApiResponse({ status: 404 })
   createBill(@Body() request: AddBillDto): any {
     let localRequest = this.billFactoryService.createBillCommand(request);

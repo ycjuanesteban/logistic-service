@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Bill, BillDetail, User } from '../../domain';
+import { Bill, BillDetail, Product, User } from '../../domain';
 
 export const databaseProviders = [
   {
@@ -15,7 +15,8 @@ export const databaseProviders = [
         entities: [
           User,
           Bill,
-          BillDetail
+          BillDetail,
+          Product
         ],
         synchronize: true
       });

@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Bill, BillDetail, User } from '../../domain';
+import { Bill, BillDetail, Product, User } from '../../domain';
 
 export const repositoryProviders = [
     {
@@ -17,4 +17,9 @@ export const repositoryProviders = [
         useFactory: (dataSource: DataSource) => dataSource.getRepository(BillDetail),
         inject: ['MySQL_Provider'],
     },
+    {
+        provide: 'PRODUCT_REPOSITORY',
+        useFactory: (dataSource: DataSource) => dataSource.getRepository(Product),
+        inject: ['MySQL_Provider'],
+    }
 ];
