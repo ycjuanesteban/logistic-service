@@ -1,9 +1,12 @@
 import { BasicEntity } from "@app/shared";
-import { Column, Entity, JoinColumn, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { BillDetail } from "./billdetail.entity";
 
 @Entity()
-export class Product extends BasicEntity {
+export class Product {
+
+    @PrimaryGeneratedColumn()
+    Id: number;
 
     @Column()
     public Name: string;

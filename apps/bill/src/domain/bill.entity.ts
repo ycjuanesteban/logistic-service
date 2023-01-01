@@ -1,10 +1,13 @@
 import { BasicEntity } from "@app/shared";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { BillDetail } from "./billdetail.entity";
 import { User } from "./user.entity";
 
 @Entity()
-export class Bill extends BasicEntity {
+export class Bill {
+
+    @PrimaryGeneratedColumn()
+    Id: number;
 
     @Column()
     public Date: Date;
