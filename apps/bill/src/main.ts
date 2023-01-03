@@ -1,9 +1,9 @@
+import { UseSwagger } from '@app/shared/api/extensions/app.swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 //Orm required
 import "reflect-metadata";
-import { UseSwagger } from './api/extensions/app.swagger';
 import { MainModule } from './main.module';
 
 async function bootstrap() {

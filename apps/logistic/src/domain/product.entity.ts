@@ -1,11 +1,11 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { BillDetail } from "./billdetail.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BillDetail } from "./billdetails.entity";
 
 @Entity()
 export class Product {
 
     @PrimaryGeneratedColumn()
-    public Id: number;
+    Id: number;
 
     @Column()
     public Name: string;

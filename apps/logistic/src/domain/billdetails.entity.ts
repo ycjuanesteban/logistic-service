@@ -6,21 +6,21 @@ import { Product } from "./product.entity";
 export class BillDetail {
 
     @PrimaryGeneratedColumn()
-    public Id: number;
+    Id: number;
 
     @Column()
-    public Quantity: number;
+    Quantity: number;
 
     @Column({
         type: "double"
     })
-    public Cost: number;
+    Cost: number;
 
     @ManyToOne(type => Product, product => product.BillDetails, { cascade: true })
     @JoinColumn({ name: "ProductId" })
-    public Product: Product;
+    Product: Product;
 
     @ManyToOne(type => Bill, bill => bill.Details)
     @JoinColumn({ name: "BillId" })
-    public Bill: Bill;
+    Bill: Bill;
 }

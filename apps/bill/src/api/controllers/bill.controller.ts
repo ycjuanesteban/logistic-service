@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { BaseController } from '@app/shared/api/controllers/base.controller';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddBillDto } from '../../application/dtos/AddBillDto';
@@ -6,16 +7,16 @@ import { BillFactoryService } from '../../application/factories/bill.factory.ser
 
 @ApiTags('Bill')
 @Controller('Bill')
-export class BillController {
+export class BillController extends BaseController {
   constructor(
-    private commandBus: CommandBus,
+    commandBus: CommandBus,
     private billFactoryService: BillFactoryService
-  ) { }
+  ) {
+    super(commandBus)
+  }
 
   @Post()
-  @ApiResponse({ status: 204 })
-  @ApiResponse({ status: 400 })
-  @ApiResponse({ status: 404 })
+  @ApiResponse({ status: 201, description: "Created" })
   createBill(@Body() request: AddBillDto): any {
     let localRequest = this.billFactoryService.createBillCommand(request);
     return this.commandBus.execute(localRequest);
