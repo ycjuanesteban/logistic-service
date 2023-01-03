@@ -18,7 +18,7 @@ export class LogisticController extends BaseController {
 
   @Post()
   @ApiResponse({ status: 201, description: "Created" })
-  createBill(@Body() request: AddShippingDto): any {
+  createShipping(@Body() request: AddShippingDto): any {
     let localRequest = this.shippingFactoryService.createShippingCommand(request);
     return this.commandBus.execute(localRequest);
   }

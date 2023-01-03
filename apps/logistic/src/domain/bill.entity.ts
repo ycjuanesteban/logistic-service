@@ -22,7 +22,7 @@ export class Bill {
     @JoinColumn({ name: "ClientId" })
     public User: User;
 
-    @OneToOne(() => Shipping)
+    @OneToOne(() => Shipping, { eager: true, cascade: true })
     @JoinColumn({ name: "ShippingId" })
     public Shipping: Shipping;
 }
