@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { AddBillCommand } from "../bill/addBill/addBillCommand";
-import { AddBillDto } from "../dtos/AddBillDto";
+import { AddBillDto } from "../dtos/addBillDto";
 
 @Injectable()
 export class BillFactoryService {
