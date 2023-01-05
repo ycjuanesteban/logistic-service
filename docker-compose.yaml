@@ -1,5 +1,16 @@
 version: '3.3'
 services:
+  checkout-api:
+    container_name: checkout-api
+    restart: always
+    environment:
+      - BILL_SERVICE_URL=http://localhost:3000
+      - LOGISTIC_SERVICE_URL=http://localhost:3001
+    build:
+      context: .
+      dockerfile: ./apps/checkout/Dockerfile
+    ports:
+      - "3000:3000"
   db:
     image: mysql:5.7
     restart: always
