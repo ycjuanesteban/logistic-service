@@ -13,6 +13,6 @@ export class BillService {
 
     async addNewBill(checkout: CheckoutDto): Promise<void> {
         let baseUrl = this.configService.getOrThrow<string>('BILL_SERVICE_URL');
-        await this.httpService.axiosRef.post(`${baseUrl}/bill`, checkout);
+        await this.httpService.axiosRef.post(`${baseUrl}/api/v1/bill`, checkout);
     }
 }

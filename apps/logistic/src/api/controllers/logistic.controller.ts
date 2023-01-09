@@ -6,7 +6,7 @@ import { AddShippingDto } from '../../application/dtos/addShippingDto';
 import { ShippingFactoryService } from '../../application/factories/shippingFactoryService';
 
 @ApiTags('Shipping')
-@Controller('Shipping')
+@Controller({ path: 'shipping', version: '1' })
 export class LogisticController extends BaseController {
 
   constructor(

@@ -1,15 +1,16 @@
 import { BaseController } from '@app/shared/api/controllers/base.controller';
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddBillDto } from '../../application/dtos/addBillDto';
 import { BillFactoryService } from '../../application/factories/bill.factory.service';
 
 @ApiTags('Bill')
-@Controller('/api/v1/bill')
+@Controller({ path: 'bill', version: '1' })
 export class BillController extends BaseController {
+
   constructor(
-    commandBus: CommandBus,
+    protected commandBus: CommandBus,
     private billFactoryService: BillFactoryService
   ) {
     super(commandBus)
