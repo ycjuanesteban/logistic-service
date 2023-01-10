@@ -40,9 +40,3 @@ export class BillFactoryService {
     return details;
   }
 }
-;
-
-        return details;
-    }
-
-}
