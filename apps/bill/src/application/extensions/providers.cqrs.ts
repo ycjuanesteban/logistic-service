@@ -1,5 +1,3 @@
-import { AddBillCommandHandler } from "../bill/addBill/addBillCommandHandler";
+import { AddBillCommandHandler } from '../bill/addBill/addBillCommandHandler';
 
-export const commandsHandlers = [
-    AddBillCommandHandler
-]
+export const commandsHandlers = [AddBillCommandHandler];

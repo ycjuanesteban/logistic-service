@@ -1,7 +1,6 @@
-import { PrimaryGeneratedColumn } from "typeorm";
+import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class BasicEntity {
-
-    @PrimaryGeneratedColumn()
-    Id: number;
+  @PrimaryGeneratedColumn()
+  Id: number;
 }

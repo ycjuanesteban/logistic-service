@@ -7,11 +7,9 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true,
       ignoreEnvVars: false,
-      envFilePath: [
-        `${process.cwd()}/apps/bill/src/.env`
-      ]
+      envFilePath: [`${process.cwd()}/apps/bill/src/.env`],
     }),
-    BillModule
-  ]
+    BillModule,
+  ],
 })
-export class MainModule { }
+export class MainModule {}

@@ -1,31 +1,30 @@
 export class Response<T> {
+  constructor() {
+    this.errors = [];
+  }
 
-    constructor() {
-        this.errors = [];
-    }
+  success: boolean;
+  errors: string[];
+  data: T;
 
-    success: boolean;
-    errors: string[];
-    data: T;
+  setFailWithErrors(errors: string[]): Response<T> {
+    this.success = false;
+    this.errors = errors;
 
-    setFailWithErrors(errors: string[]) : Response<T> {
-        this.success = false;
-        this.errors = errors;
+    return this;
+  }
 
-        return this;
-    }
+  setFailWithError(error: string): Response<T> {
+    this.success = false;
+    this.errors.push(error);
 
-    setFailWithError(error: string) : Response<T> {
-        this.success = false;
-        this.errors.push(error);
+    return this;
+  }
 
-        return this;
-    }
+  setSuccess(data: T): Response<T> {
+    this.success = true;
+    this.data = data;
 
-    setSuccess(data: T) : Response<T>{
-        this.success = true;
-        this.data = data;
-
-        return this;
-    }
+    return this;
+  }
 }

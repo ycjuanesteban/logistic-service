@@ -6,17 +6,13 @@ import { factoriesServices } from './application/extensions/services';
 import { databaseProviders, repositoryProviders } from './data';
 
 @Module({
-  imports: [
-    CqrsModule
-  ],
-  controllers: [
-    BillController
-  ],
+  imports: [CqrsModule],
+  controllers: [BillController],
   providers: [
     ...databaseProviders,
     ...repositoryProviders,
     ...commandsHandlers,
-    ...factoriesServices
+    ...factoriesServices,
   ],
 })
-export class BillModule { }
+export class BillModule {}

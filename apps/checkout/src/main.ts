@@ -1,10 +1,14 @@
 import { UseSwagger } from '@app/shared/app/extensions/app.swagger';
-import { ValidationPipe, VersioningType, VERSION_NEUTRAL } from '@nestjs/common';
+import {
+  ValidationPipe,
+  VersioningType,
+  VERSION_NEUTRAL,
+} from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { MainModule } from './main.module';
 
 //Orm required
-import "reflect-metadata";
+import 'reflect-metadata';
 import { AllExceptionsFilter } from '@app/shared/app/filters/allExceptions.filter';
 
 async function bootstrap() {
@@ -17,10 +21,10 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   app.enableVersioning({
-    type: VersioningType.URI
+    type: VersioningType.URI,
   });
 
-  UseSwagger(app, "Checkout");
+  UseSwagger(app, 'Checkout');
 
   await app.listen(3000);
 }

@@ -1,8 +1,7 @@
-import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Shipping {
-
-    @PrimaryGeneratedColumn()
-    public Id: number;
+  @PrimaryGeneratedColumn()
+  public Id: number;
 }

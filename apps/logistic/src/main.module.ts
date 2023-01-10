@@ -7,11 +7,9 @@ import { LogisticModule } from './logistic.module';
     ConfigModule.forRoot({
       isGlobal: true,
       ignoreEnvVars: false,
-      envFilePath: [
-        `${process.cwd()}/apps/logistic/src/.env`
-      ]
+      envFilePath: [`${process.cwd()}/apps/logistic/src/.env`],
     }),
-    LogisticModule
-  ]
+    LogisticModule,
+  ],
 })
-export class MainModule { }
+export class MainModule {}

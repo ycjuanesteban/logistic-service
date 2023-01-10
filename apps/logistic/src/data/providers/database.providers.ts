@@ -14,15 +14,9 @@ export const databaseProviders = [
         username: configService.getOrThrow<string>('DB_USER_NAME'),
         password: configService.getOrThrow<string>('DB_PASSWORD'),
         database: configService.getOrThrow<string>('DB_DATA_BASE'),
-        entities: [
-          User,
-          Bill,
-          BillDetail,
-          Product,
-          Shipping
-        ],
+        entities: [User, Bill, BillDetail, Product, Shipping],
         synchronize: true,
-        entityPrefix: 'logistic_'
+        entityPrefix: 'logistic_',
       });
       return dataSource.initialize();
     },

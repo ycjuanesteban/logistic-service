@@ -1,5 +1,3 @@
-import { AddShippingCommandHandler } from "../logistic/addShippingOrder/addShippingOrderCommandHandler";
+import { AddShippingCommandHandler } from '../logistic/addShippingOrder/addShippingOrderCommandHandler';
 
-export const commandsHandlers = [
-    AddShippingCommandHandler
-]
+export const commandsHandlers = [AddShippingCommandHandler];

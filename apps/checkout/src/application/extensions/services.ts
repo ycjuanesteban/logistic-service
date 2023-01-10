@@ -1,12 +1,7 @@
-import { CheckoutFactoryService } from "../factories/checkout.factory.service";
-import { BillService } from "../services/bill.service";
-import { LogisticService } from "../services/logistic.service";
+import { CheckoutFactoryService } from '../factories/checkout.factory.service';
+import { BillService } from '../services/bill.service';
+import { LogisticService } from '../services/logistic.service';
 
-export const services = [
-    BillService,
-    LogisticService
-]
+export const services = [BillService, LogisticService];
 
-export const factoriesServices = [
-    CheckoutFactoryService
-]
+export const factoriesServices = [CheckoutFactoryService];

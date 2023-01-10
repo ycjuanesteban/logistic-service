@@ -1,5 +1,3 @@
-import { ShippingFactoryService } from "../factories/shippingFactoryService";
+import { ShippingFactoryService } from '../factories/shippingFactoryService';
 
-export const factoriesServices = [
-    ShippingFactoryService
-];
+export const factoriesServices = [ShippingFactoryService];

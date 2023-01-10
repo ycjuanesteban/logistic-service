@@ -1,10 +1,14 @@
 import { UseSwagger } from '@app/shared/app/extensions/app.swagger';
 import { AllExceptionsFilter } from '@app/shared/app/filters/allExceptions.filter';
-import { ValidationPipe, VersioningType, VERSION_NEUTRAL } from '@nestjs/common';
+import {
+  ValidationPipe,
+  VersioningType,
+  VERSION_NEUTRAL,
+} from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
 //Orm required
-import "reflect-metadata";
+import 'reflect-metadata';
 import { MainModule } from './main.module';
 
 async function bootstrap() {
@@ -18,10 +22,10 @@ async function bootstrap() {
 
   app.enableVersioning({
     type: VersioningType.URI,
-    defaultVersion: VERSION_NEUTRAL
+    defaultVersion: VERSION_NEUTRAL,
   });
 
-  UseSwagger(app, "Bill");
+  UseSwagger(app, 'Bill');
 
   await app.listen(3000);
 }

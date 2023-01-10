@@ -8,19 +8,18 @@ import { ShippingFactoryService } from '../../application/factories/shippingFact
 @ApiTags('Shipping')
 @Controller({ path: 'shipping', version: '1' })
 export class ShippingController extends BaseController {
-
   constructor(
     protected commandBus: CommandBus,
-    private shippingFactoryService: ShippingFactoryService
+    private shippingFactoryService: ShippingFactoryService,
   ) {
-    super(commandBus)
+    super(commandBus);
   }
 
   @Post()
-  @ApiResponse({ status: 201, description: "Created" })
+  @ApiResponse({ status: 201, description: 'Created' })
   createShipping(@Body() request: AddShippingDto): any {
-    let localRequest = this.shippingFactoryService.createShippingCommand(request);
+    const localRequest =
+      this.shippingFactoryService.createShippingCommand(request);
     return this.commandBus.execute(localRequest);
   }
-
 }

@@ -8,18 +8,17 @@ import { BillFactoryService } from '../../application/factories/bill.factory.ser
 @ApiTags('Bill')
 @Controller({ path: 'bill', version: '1' })
 export class BillController extends BaseController {
-
   constructor(
     protected commandBus: CommandBus,
-    private billFactoryService: BillFactoryService
+    private billFactoryService: BillFactoryService,
   ) {
-    super(commandBus)
+    super(commandBus);
   }
 
   @Post()
-  @ApiResponse({ status: 201, description: "Created" })
+  @ApiResponse({ status: 201, description: 'Created' })
   createBill(@Body() request: AddBillDto): any {
-    let localRequest = this.billFactoryService.createBillCommand(request);
+    const localRequest = this.billFactoryService.createBillCommand(request);
     return this.commandBus.execute(localRequest);
   }
 }

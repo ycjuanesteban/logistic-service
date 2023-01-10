@@ -1,5 +1,3 @@
-import { CheckoutCommandHandler } from "../checkout/checkoutCommandHandler";
+import { CheckoutCommandHandler } from '../checkout/checkoutCommandHandler';
 
-export const commandsHandlers = [
-    CheckoutCommandHandler
-]
+export const commandsHandlers = [CheckoutCommandHandler];

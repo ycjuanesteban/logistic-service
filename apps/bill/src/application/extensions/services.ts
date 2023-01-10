@@ -1,5 +1,3 @@
-import { BillFactoryService } from "../factories/bill.factory.service";
+import { BillFactoryService } from '../factories/bill.factory.service';
 
-export const factoriesServices = [
-    BillFactoryService
-];
+export const factoriesServices = [BillFactoryService];

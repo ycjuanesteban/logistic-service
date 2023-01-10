@@ -7,11 +7,9 @@ import { CheckoutModule } from './checkout.module';
     ConfigModule.forRoot({
       isGlobal: true,
       ignoreEnvVars: false,
-      envFilePath: [
-        `${process.cwd()}/apps/checkout/src/.env`
-      ]
+      envFilePath: [`${process.cwd()}/apps/checkout/src/.env`],
     }),
-    CheckoutModule
-  ]
+    CheckoutModule,
+  ],
 })
-export class MainModule { }
+export class MainModule {}
