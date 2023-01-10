@@ -1,16 +1,30 @@
 version: '3.3'
+
+networks:
+  app-network: {}
+
 services:
-  checkout-api:
-    container_name: checkout-api
+  bill-api:
+    container_name: bill-api
     restart: always
-    environment:
-      - BILL_SERVICE_URL=http://localhost:3000
-      - LOGISTIC_SERVICE_URL=http://localhost:3001
     build:
       context: .
-      dockerfile: ./apps/checkout/Dockerfile
+      dockerfile: ./apps/bill/Dockerfile
+    environment:
+      DB_HOST: 'host.docker.internal'
+      DB_PORT: '3306'
+      DB_USER_NAME: 'user'
+      DB_PASSWORD: 'password'
+      DB_DATA_BASE: 'db'
     ports:
-      - "3000:3000"
+      - "3001:3000"
+    networks:
+      - app-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - db
+
   db:
     image: mysql:5.7
     restart: always
@@ -25,5 +39,8 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
+    networks:
+      - app-network
+
 volumes:
   my-db:
