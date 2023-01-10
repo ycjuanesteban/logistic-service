@@ -1,5 +1,5 @@
 import { UseSwagger } from '@app/shared/app/extensions/app.swagger';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType, VERSION_NEUTRAL } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { MainModule } from './main.module';
 
@@ -10,11 +10,17 @@ import { AllExceptionsFilter } from '@app/shared/app/filters/allExceptions.filte
 async function bootstrap() {
   const app = await NestFactory.create(MainModule);
 
-  UseSwagger(app, "Checkout");
-
   app.useGlobalPipes(new ValidationPipe());
 
   app.useGlobalFilters(new AllExceptionsFilter(app.get(HttpAdapterHost<any>)));
+
+  app.setGlobalPrefix('api');
+
+  app.enableVersioning({
+    type: VersioningType.URI
+  });
+
+  UseSwagger(app, "Checkout");
 
   await app.listen(3002);
 }

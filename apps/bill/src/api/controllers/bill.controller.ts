@@ -6,10 +6,11 @@ import { AddBillDto } from '../../application/dtos/addBillDto';
 import { BillFactoryService } from '../../application/factories/bill.factory.service';
 
 @ApiTags('Bill')
-@Controller('Bill')
+@Controller({ path: 'bill', version: '1' })
 export class BillController extends BaseController {
+
   constructor(
-    commandBus: CommandBus,
+    protected commandBus: CommandBus,
     private billFactoryService: BillFactoryService
   ) {
     super(commandBus)

@@ -6,7 +6,6 @@ export const UseSwagger = (app: INestApplication, appName: string) => {
     const config = new DocumentBuilder()
         .setTitle(`${appName}-Service`)
         .setDescription(`${appName} Service`)
-        .setVersion('1.0')
         .build();
 
     const document = SwaggerModule.createDocument(app, config);
