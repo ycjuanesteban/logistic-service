@@ -23,6 +23,6 @@ async function bootstrap() {
 
   UseSwagger(app, "Logistic");
 
-  await app.listen(3001);
+  await app.listen(3000);
 }
 bootstrap();

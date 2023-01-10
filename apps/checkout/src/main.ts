@@ -22,6 +22,6 @@ async function bootstrap() {
 
   UseSwagger(app, "Checkout");
 
-  await app.listen(3002);
+  await app.listen(3000);
 }
 bootstrap();

@@ -7,7 +7,7 @@ import { ShippingFactoryService } from '../../application/factories/shippingFact
 
 @ApiTags('Shipping')
 @Controller({ path: 'shipping', version: '1' })
-export class LogisticController extends BaseController {
+export class ShippingController extends BaseController {
 
   constructor(
     protected commandBus: CommandBus,
