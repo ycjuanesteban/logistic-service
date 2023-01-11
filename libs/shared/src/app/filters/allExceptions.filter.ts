@@ -26,6 +26,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
       message: (exception as HttpException).message,
+      stackTrace: (exception as HttpException).stack
     };
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);

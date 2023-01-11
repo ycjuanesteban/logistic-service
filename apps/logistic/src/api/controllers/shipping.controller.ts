@@ -3,14 +3,16 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AddShippingDto } from '../../application/dtos/addShippingDto';
-import { ShippingFactoryService } from '../../application/factories/shippingFactoryService';
+import {
+  AddShippingCommand,
+  ProductCommand
+} from '../../application/logistic/addShippingOrder/addShippingOrderCommand';
 
 @ApiTags('Shipping')
 @Controller({ path: 'shipping', version: '1' })
 export class ShippingController extends BaseController {
   constructor(
-    protected commandBus: CommandBus,
-    private shippingFactoryService: ShippingFactoryService,
+    protected commandBus: CommandBus
   ) {
     super(commandBus);
   }
@@ -18,8 +20,16 @@ export class ShippingController extends BaseController {
   @Post()
   @ApiResponse({ status: 201, description: 'Created' })
   createShipping(@Body() request: AddShippingDto): any {
-    const localRequest =
-      this.shippingFactoryService.createShippingCommand(request);
-    return this.commandBus.execute(localRequest);
+    let products = [];
+
+    request.Products.forEach(currentProduct => {
+      products.push(new ProductCommand(currentProduct.ProductId, currentProduct.Quantity, currentProduct.Cost));
+    });
+
+    return this.commandBus.execute(new AddShippingCommand(
+      request.UserId,
+      request.Address,
+      products
+    ));
   }
 }

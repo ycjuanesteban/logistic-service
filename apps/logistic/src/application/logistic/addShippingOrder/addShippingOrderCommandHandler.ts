@@ -1,28 +1,27 @@
-import { Inject, NotFoundException } from '@nestjs/common';
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import {
-  Bill,
-  BillDetail,
-  Product,
-  Shipping,
-  User,
-} from 'apps/logistic/src/domain';
-import { In, Repository } from 'typeorm';
-import { AddShippingCommand, ProductCommand } from './addShippingOrderCommand';
+import { Inject, NotFoundException } from "@nestjs/common";
+import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
+import { BillEntity, ProductEntity, UserEntity } from "apps/logistic/src/data/models";
+import { In, Repository } from "typeorm";
+import { BillAggregate } from "../../domain/bill.aggregate";
+import { BillDetail } from "../../domain/billDetail";
+import { Product } from "../../domain/product";
+import { Shipping } from "../../domain/shipping";
+import { User } from "../../domain/user";
+import { AddShippingCommand } from "./addShippingOrderCommand";
 
 @CommandHandler(AddShippingCommand)
 export class AddShippingCommandHandler
   implements ICommandHandler<AddShippingCommand, void>
 {
   constructor(
-    @Inject('BILL_REPOSITORY') private billRepository: Repository<Bill>,
-    @Inject('USER_REPOSITORY') private userRepository: Repository<User>,
-    @Inject('PRODUCT_REPOSITORY')
-    private productRepository: Repository<Product>,
-  ) {}
+    @Inject('BILL_REPOSITORY') private billRepository: Repository<BillEntity>,
+    @Inject('USER_REPOSITORY') private userRepository: Repository<UserEntity>,
+    @Inject('PRODUCT_REPOSITORY') private productRepository: Repository<ProductEntity>,
+  ) { }
 
   async execute(command: AddShippingCommand): Promise<void> {
-    const user = await this.getUser(command.UserId);
+
+    let user = await this.getUser(command.UserId);
 
     if (user == null) {
       throw new NotFoundException('User not found');
@@ -32,74 +31,29 @@ export class AddShippingCommandHandler
       command.Products.map((x) => x.ProductId),
     );
 
-    const simpleProducts = this.removeDuplicates(command.Products);
-
-    if (products.length != simpleProducts.length) {
-      throw new NotFoundException('One or more products not found');
+    if (products.length != [...new Set(command.Products.map(x => x.ProductId))].length) {
+      throw new NotFoundException("One or more products not found");
     }
 
-    const newBill = this.createBill(command);
-    newBill.Details = this.createBillDetails(simpleProducts, products);
-    newBill.User = user;
-    newBill.Shipping = new Shipping();
-
-    await this.billRepository.save(newBill);
-  }
-
-  private createBill(command: AddShippingCommand): Bill {
-    const newBill = new Bill();
-    newBill.Address = command.Address;
-    newBill.Date = new Date();
-
-    return newBill;
-  }
-
-  private createBillDetails(
-    products: ProductCommand[],
-    productsDb: Product[],
-  ): BillDetail[] {
-    const details: BillDetail[] = [];
-
-    products.forEach((currentProduct) => {
-      const detail = new BillDetail();
-      detail.Cost = currentProduct.Cost;
-      detail.Product = productsDb.find((x) => x.Id == currentProduct.ProductId);
-      detail.Quantity = currentProduct.Quantity;
-
-      details.push(detail);
+    let details: BillDetail[] = [];
+    command.Products.forEach(currentProduct => {
+      let productFound = products.filter(x => x.Id == currentProduct.ProductId)[0];
+      let product = Product.ToDomain(productFound);
+      details.push(BillDetail.Create(currentProduct.Quantity, currentProduct.Cost, product));
     });
 
-    return details;
-  }
+    let newBill = BillAggregate.Create(command.Address);
+    newBill.BillUser = User.ToDomain(user);
+    newBill.BillShipping = Shipping.Create();
 
-  private removeDuplicates(products: ProductCommand[]) {
-    const simpleProducts: ProductCommand[] = [];
-
-    products.forEach((currentProduct) => {
-      const existCurrentProduct = simpleProducts.filter(
-        (x) => x.ProductId == currentProduct.ProductId,
-      );
-
-      if (existCurrentProduct.length == 0) {
-        const detail = new ProductCommand();
-        detail.Cost = currentProduct.Cost;
-        detail.Quantity = currentProduct.Quantity;
-        detail.ProductId = currentProduct.ProductId;
-
-        simpleProducts.push(detail);
-      } else {
-        const index = simpleProducts.findIndex(
-          (x) => x.ProductId == currentProduct.ProductId,
-        );
-        simpleProducts[index].Quantity += currentProduct.Quantity;
-        simpleProducts[index].Cost += currentProduct.Cost;
-      }
+    details.forEach((currentDetail: BillDetail) => {
+      newBill.BillDetails = currentDetail;
     });
 
-    return simpleProducts;
+    await this.billRepository.save(BillAggregate.ToEntity(newBill));
   }
 
-  private async getUser(userId: number): Promise<User> {
+  private async getUser(userId: number): Promise<UserEntity> {
     return await this.userRepository.findOne({
       where: {
         Id: userId,
@@ -107,9 +61,10 @@ export class AddShippingCommandHandler
     });
   }
 
-  private async getProducts(productsId: number[]): Promise<Product[]> {
+  private async getProducts(productsId: number[]): Promise<ProductEntity[]> {
     return await this.productRepository.findBy({
       Id: In(productsId),
     });
   }
+
 }
