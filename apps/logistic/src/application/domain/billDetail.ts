@@ -68,21 +68,21 @@ export class BillDetail {
     return new BillDetail(quantity, cost, product, id);
   }
 
-  public static toDomain(entity: BillDetailEntity): BillDetail {
+  public static ToDomain(entity: BillDetailEntity): BillDetail {
     return BillDetail.Create(
       entity.Quantity,
       entity.Cost,
-      Product.toDomain(entity.Product),
+      Product.ToDomain(entity.Product),
       entity.Id
     );
   }
 
-  public static toEntity(domain: BillDetail): BillDetailEntity {
+  public static ToEntity(domain: BillDetail): BillDetailEntity {
     let billDetail = new BillDetailEntity();
 
     billDetail.Cost = domain.BillDetailCost;
     billDetail.Id = domain.BillDetailId;
-    billDetail.Product = Product.toEntity(domain.BillDetailProduct);
+    billDetail.Product = Product.ToEntity(domain.BillDetailProduct);
     billDetail.Quantity = domain.BillDetailQuantity;
 
     return billDetail;

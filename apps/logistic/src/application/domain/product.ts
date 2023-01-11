@@ -34,11 +34,11 @@ export class Product {
     return new Product(name, id);
   }
 
-  public static toDomain(entity: ProductEntity): Product {
+  public static ToDomain(entity: ProductEntity): Product {
     return Product.Create(entity.Name, entity.Id);
   }
 
-  public static toEntity(domain: Product): ProductEntity {
+  public static ToEntity(domain: Product): ProductEntity {
     let product = new ProductEntity();
 
     product.Id = domain.ProductId;

@@ -21,11 +21,11 @@ export class Shipping {
     return new Shipping(id);
   }
 
-  public static toDomain(entity: ShippingEntity): Shipping {
+  public static ToDomain(entity: ShippingEntity): Shipping {
     return Shipping.Create(entity.Id);
   }
 
-  public static toEntity(domain: Shipping): ShippingEntity {
+  public static ToEntity(domain: Shipping): ShippingEntity {
     let shippingEntity = new ShippingEntity();
     shippingEntity.Id = domain.ShippingId;
 

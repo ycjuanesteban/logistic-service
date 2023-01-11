@@ -89,36 +89,36 @@ export class BillAggregate {
     return new BillAggregate(address, id, date);
   }
 
-  public static toDomain(entity: BillEntity): BillAggregate {
+  public static ToDomain(entity: BillEntity): BillAggregate {
     let bill = BillAggregate.Create(
       entity.Address,
       entity.Id
     );
 
     entity.Details.forEach(currentDetail => {
-      bill.BillDetails = BillDetail.toDomain(currentDetail);
+      bill.BillDetails = BillDetail.ToDomain(currentDetail);
     });
 
-    bill.BillUser = User.toDomain(entity.User);
-    bill.BillShipping = Shipping.toDomain(entity.Shipping);
+    bill.BillUser = User.ToDomain(entity.User);
+    bill.BillShipping = Shipping.ToDomain(entity.Shipping);
 
     return bill;
 
   }
 
-  public static toEntity(domain: BillAggregate): BillEntity {
+  public static ToEntity(domain: BillAggregate): BillEntity {
     let bill = new BillEntity();
 
     let details: BillDetailEntity[] = [];
     domain.BillDetail.forEach(currentDetail => {
-      details.push(BillDetail.toEntity(currentDetail));
+      details.push(BillDetail.ToEntity(currentDetail));
     });
 
     bill.Address = domain.BillAddress;
     bill.Date = domain.BillDate;
     bill.Details = details;
-    bill.Shipping = Shipping.toEntity(domain.BillShipping);
-    bill.User = User.toEntity(domain.BillUser);
+    bill.Shipping = Shipping.ToEntity(domain.BillShipping);
+    bill.User = User.ToEntity(domain.BillUser);
 
     return bill;
   }

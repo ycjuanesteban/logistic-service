@@ -34,11 +34,11 @@ export class User {
     return new User(name, id);
   }
 
-  public static toDomain(entity: UserEntity): User {
+  public static ToDomain(entity: UserEntity): User {
     return User.Create(entity.Name, entity.Id);
   }
 
-  public static toEntity(domain: User): UserEntity {
+  public static ToEntity(domain: User): UserEntity {
     let user = new UserEntity();
 
     user.Id = domain.UserId;

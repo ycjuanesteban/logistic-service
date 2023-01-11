@@ -35,19 +35,19 @@ export class AddShippingCommandHandler implements ICommandHandler<AddShippingCom
     let details: BillDetail[] = [];
     command.Products.forEach(currentProduct => {
       let productFound = products.filter(x => x.Id == currentProduct.ProductId)[0];
-      let product = Product.toDomain(productFound);
+      let product = Product.ToDomain(productFound);
       details.push(BillDetail.Create(currentProduct.Quantity, currentProduct.Cost, product));
     });
 
     let newBill = BillAggregate.Create(command.Address);
-    newBill.BillUser = User.toDomain(user);
+    newBill.BillUser = User.ToDomain(user);
     newBill.BillShipping = Shipping.Create();
 
     details.forEach((currentDetail: BillDetail) => {
       newBill.BillDetails = currentDetail;
     });
 
-    await this.billRepository.save(BillAggregate.toEntity(newBill));
+    await this.billRepository.save(BillAggregate.ToEntity(newBill));
   }
 
   private async getUser(userId: number): Promise<UserEntity> {
