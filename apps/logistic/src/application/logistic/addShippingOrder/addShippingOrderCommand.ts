@@ -1,15 +1,15 @@
 export class ProductCommand {
-    ProductId: number;
-    Quantity: number;
-    Cost: number;
+  constructor(
+    public readonly ProductId: number,
+    public readonly Quantity: number,
+    public readonly Cost: number
+  ) { }
 }
 
 export class AddShippingCommand {
-    UserId: number;
-    Address: string;
-    Products: ProductCommand[];
-
-    constructor() {
-        this.Products = [];
-    }
+  constructor(
+    public readonly UserId: number,
+    public readonly Address: string,
+    public readonly Products: ProductCommand[]
+  ) { }
 }

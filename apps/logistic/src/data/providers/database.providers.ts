@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-import { Bill, BillDetail, Product, Shipping, User } from '../../domain';
+import { BillEntity, BillDetailEntity, ProductEntity, ShippingEntity, UserEntity } from '../models';
 
 export const databaseProviders = [
   {
@@ -15,11 +15,11 @@ export const databaseProviders = [
         password: configService.getOrThrow<string>('DB_PASSWORD'),
         database: configService.getOrThrow<string>('DB_DATA_BASE'),
         entities: [
-          User,
-          Bill,
-          BillDetail,
-          Product,
-          Shipping
+          UserEntity,
+          BillEntity,
+          BillDetailEntity,
+          ProductEntity,
+          ShippingEntity
         ],
         synchronize: true,
         entityPrefix: 'logistic_'
