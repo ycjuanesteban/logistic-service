@@ -1,7 +1,12 @@
-import { BillDetailEntity, BillEntity } from "../../data/models";
-import { BillDetail } from "./billDetail";
-import { Shipping } from "./shipping";
-import { User } from "./user";
+import {
+  BillDetailEntity,
+  BillEntity
+} from "../../data/models";
+import {
+  BillDetail,
+  Shipping,
+  User
+} from ".";
 
 export class BillAggregate {
   private Id: number;
