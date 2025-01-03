@@ -1,5 +1,3 @@
-# Juan Esteban Yarce Carmona
-
 ## Prueba 1
 
 La aplicación cuenta con tres proyectos:
